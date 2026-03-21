@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EduSpark - Learn Smart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: rgba(0,0,0,0.3);
+}
+
+button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Login Box */
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+/* Dashboard */
+.dashboard {
+    display: none;
+    padding: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.2);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Progress Bar */
+.progress-bar {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 20px;
+    background: limegreen;
+    width: 0%;
+}
+
+/* Subjects Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>📘 EduSpark</h2>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<!-- LOGIN -->
+<div class="container" id="loginBox">
+    <h1>Student Login</h1>
+    <input type="text" id="username" placeholder="Enter Name"><br>
+    <select id="board">
+        <option>CBSE</option>
+        <option>ICSE</option>
+    </select><br>
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+    <h2 id="welcome"></h2>
+
+    <h3>Your Progress</h3>
+    <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <h3>Subjects</h3>
+    <div class="grid">
+
+        <div class="card">
+            <h3>Maths</h3>
+            <p>Formulas, Identities & PDFs</p>
+            <button onclick="openResource('math')">Open</button>
+        </div>
+
+        <div class="card">
+            <h3>Science</h3>
+            <p>Concepts & Practice Papers</p>
+            <button onclick="openResource('science')">Open</button>
+        </div>
+
+        <div class="card">
+            <h3>English</h3>
+            <p>Grammar & Writing Skills</p>
+            <button onclick="openResource('english')">Open</button>
+        </div>
+
+        <div class="card">
+            <h3>Social Studies</h3>
+            <p>History, Civics, Geography</p>
+            <button onclick="openResource('sst')">Open</button>
+        </div>
+
+    </div>
+
+    <div id="resources"></div>
+</div>
+
+<script>
+
+/* LOGIN SYSTEM */
+function login() {
+    let user = document.getElementById("username").value;
+    let board = document.getElementById("board").value;
+
+    if (user === "") {
+        alert("Enter name!");
+        return;
+    }
+
+    localStorage.setItem("user", user);
+    localStorage.setItem("board", board);
+    localStorage.setItem("progress", 10);
+
+    loadDashboard();
+}
+
+function logout() {
+    localStorage.clear();
+    location.reload();
+}
+
+/* LOAD DASHBOARD */
+function loadDashboard() {
+    let user = localStorage.getItem("user");
+
+    if (user) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+
+        document.getElementById("welcome").innerHTML =
+            "Welcome " + user + " (" + localStorage.getItem("board") + ")";
+
+        updateProgress();
+    }
+}
+
+/* UPDATE PROGRESS */
+function updateProgress() {
+    let progress = localStorage.getItem("progress") || 0;
+    document.getElementById("progress").style.width = progress + "%";
+}
+
+/* RESOURCES */
+function openResource(subject) {
+    let content = "";
+
+    if (subject === "math") {
+        content = `
+        <h3>Math Resources</h3>
+        <ul>
+            <li><a href="#">Algebra Identities PDF</a></li>
+            <li><a href="#">Practice Paper 1</a></li>
+            <li><a href="#">Solved Examples</a></li>
+        </ul>`;
+    }
+
+    if (subject === "science") {
+        content = `
+        <h3>Science Resources</h3>
+        <ul>
+            <li><a href="#">Physics Notes</a></li>
+            <li><a href="#">Chemistry Reactions PDF</a></li>
+            <li><a href="#">Biology Diagrams</a></li>
+        </ul>`;
+    }
+
+    if (subject === "english") {
+        content = `
+        <h3>English Resources</h3>
+        <ul>
+            <li><a href="#">Grammar Rules</a></li>
+            <li><a href="#">Essay Writing</a></li>
+            <li><a href="#">Letter Formats</a></li>
+        </ul>`;
+    }
+
+    if (subject === "sst") {
+        content = `
+        <h3>SST Resources</h3>
+        <ul>
+            <li><a href="#">History Notes</a></li>
+            <li><a href="#">Geography Maps</a></li>
+            <li><a href="#">Civics Questions</a></li>
+        </ul>`;
+    }
+
+    document.getElementById("resources").innerHTML = content;
+
+    /* Increase progress */
+    let progress = parseInt(localStorage.getItem("progress")) || 0;
+    progress += 10;
+    if (progress > 100) progress = 100;
+    localStorage.setItem("progress", progress);
+    updateProgress();
+}
+
+/* AUTO LOAD */
+window.onload = loadDashboard;
+
+</script>
+
+</body>
+</html>
