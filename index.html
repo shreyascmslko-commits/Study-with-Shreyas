@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>EduSpark Pro Ultra</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>EduSpark Pro Ultra+</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+:root{
+    --primary:#6c63ff;
+    --secondary:#4facfe;
+    --glass:rgba(255,255,255,0.14);
+    --text:#ffffff;
+    --shadow:0 10px 30px rgba(0,0,0,0.2);
+    --radius:22px;
+}
 
 *{
     margin:0;
@@ -15,46 +25,52 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:'Poppins',sans-serif;
     background:linear-gradient(135deg,#4e54c8,#8f94fb);
-    min-height:100vh;
     color:white;
+    min-height:100vh;
     overflow-x:hidden;
     transition:0.5s;
 }
 
 /* Animated Background */
+
 body::before{
     content:'';
     position:fixed;
-    width:200%;
-    height:200%;
+    inset:0;
     background:
-    radial-gradient(circle,rgba(255,255,255,0.15) 2px,transparent 2px);
-    background-size:40px 40px;
-    animation:bgMove 25s linear infinite;
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,0.12) 2px,transparent 2px),
+    radial-gradient(circle at 80% 40%,rgba(255,255,255,0.10) 2px,transparent 2px),
+    radial-gradient(circle at 40% 80%,rgba(255,255,255,0.08) 2px,transparent 2px);
+    background-size:60px 60px;
+    animation:moveBg 20s linear infinite;
     z-index:-1;
 }
 
-@keyframes bgMove{
-    from{transform:translate(0,0);}
-    to{transform:translate(-200px,-200px);}
+@keyframes moveBg{
+    from{transform:translateY(0);}
+    to{transform:translateY(-120px);}
 }
 
 /* Navbar */
 
 .navbar{
+    position:sticky;
+    top:0;
+    z-index:999;
     display:flex;
     justify-content:space-between;
     align-items:center;
     padding:18px 25px;
-    background:rgba(0,0,0,0.25);
-    backdrop-filter:blur(10px);
-    box-shadow:0 4px 15px rgba(0,0,0,0.2);
-    position:sticky;
-    top:0;
-    z-index:999;
+    background:rgba(0,0,0,0.18);
+    backdrop-filter:blur(14px);
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
 }
 
 .logo{
@@ -62,46 +78,53 @@ body::before{
     font-weight:700;
 }
 
-.nav-buttons button{
-    margin-left:10px;
+.nav-buttons{
+    display:flex;
+    gap:10px;
 }
 
 /* Buttons */
 
 button{
-    padding:10px 18px;
     border:none;
-    border-radius:10px;
+    outline:none;
     cursor:pointer;
+    padding:11px 18px;
+    border-radius:14px;
     font-weight:600;
-    background:linear-gradient(45deg,#00c9a7,#00e4ff);
     color:white;
+    background:linear-gradient(45deg,#00c9a7,#00e4ff);
     transition:0.3s;
-    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
 button:hover{
     transform:translateY(-3px) scale(1.05);
 }
 
+button:active{
+    transform:scale(0.97);
+}
+
 /* Login */
 
 .container{
+    width:90%;
     max-width:450px;
     margin:70px auto;
+    padding:35px;
+    border-radius:var(--radius);
+    background:var(--glass);
+    backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);
     text-align:center;
-    padding:30px;
-    background:rgba(255,255,255,0.15);
-    border-radius:20px;
-    backdrop-filter:blur(12px);
-    box-shadow:0 10px 25px rgba(0,0,0,0.25);
-    animation:fadeIn 1s ease;
+    animation:fadeIn 0.8s ease;
 }
 
 @keyframes fadeIn{
     from{
         opacity:0;
-        transform:translateY(20px);
+        transform:translateY(30px);
     }
     to{
         opacity:1;
@@ -114,13 +137,13 @@ button:hover{
 }
 
 input,select{
-    width:90%;
-    padding:12px;
+    width:100%;
+    padding:14px;
     margin:12px 0;
     border:none;
-    border-radius:12px;
-    font-size:16px;
     outline:none;
+    border-radius:14px;
+    font-size:16px;
 }
 
 /* Dashboard */
@@ -131,28 +154,34 @@ input,select{
 }
 
 .welcome-card{
-    background:rgba(255,255,255,0.18);
-    padding:25px;
-    border-radius:20px;
+    background:var(--glass);
+    padding:28px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
     margin-bottom:25px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+.welcome-card p{
+    margin-top:10px;
+    opacity:0.9;
 }
 
 /* Stats */
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
     gap:20px;
     margin:25px 0;
 }
 
 .stat-card{
-    background:rgba(255,255,255,0.18);
-    padding:20px;
-    border-radius:18px;
+    background:var(--glass);
+    padding:25px;
+    border-radius:var(--radius);
     text-align:center;
     transition:0.4s;
+    box-shadow:var(--shadow);
 }
 
 .stat-card:hover{
@@ -160,33 +189,39 @@ input,select{
 }
 
 .stat-card h2{
-    font-size:32px;
+    font-size:36px;
+    margin-bottom:5px;
 }
 
-/* Subjects */
+/* Subject Cards */
 
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:22px;
+    margin-top:20px;
 }
 
 .card{
-    background:rgba(255,255,255,0.18);
-    padding:22px;
-    border-radius:18px;
+    background:var(--glass);
+    padding:25px;
+    border-radius:var(--radius);
     text-align:center;
     transition:0.4s;
-    box-shadow:0 8px 15px rgba(0,0,0,0.2);
+    box-shadow:var(--shadow);
 }
 
 .card:hover{
-    transform:translateY(-10px) scale(1.04);
+    transform:translateY(-10px) scale(1.03);
 }
 
 .card h3{
-    margin-bottom:15px;
-    font-size:24px;
+    margin-bottom:12px;
+    font-size:25px;
+}
+
+.card p{
+    opacity:0.92;
 }
 
 /* Progress */
@@ -194,17 +229,17 @@ input,select{
 .progress-bar{
     width:100%;
     height:24px;
-    background:rgba(255,255,255,0.25);
+    margin-top:18px;
     border-radius:30px;
     overflow:hidden;
-    margin-top:12px;
+    background:rgba(255,255,255,0.25);
 }
 
 .progress{
     height:100%;
     width:0%;
-    background:linear-gradient(90deg,#00ff87,#60efff);
     border-radius:30px;
+    background:linear-gradient(90deg,#00ff87,#60efff);
     transition:1s;
 }
 
@@ -212,10 +247,16 @@ input,select{
 
 #resources{
     margin-top:30px;
-    background:rgba(255,255,255,0.18);
-    padding:20px;
-    border-radius:18px;
-    line-height:1.8;
+    background:var(--glass);
+    padding:25px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    line-height:2;
+    animation:fadeIn 0.5s ease;
+}
+
+#resources h2{
+    margin-bottom:10px;
 }
 
 #resources a{
@@ -228,49 +269,74 @@ input,select{
     text-decoration:underline;
 }
 
-/* Quotes */
+/* Quote */
 
 .quote-box{
-    margin-top:25px;
+    margin-top:30px;
     text-align:center;
     font-size:18px;
-    opacity:0.9;
+    opacity:0.95;
+    padding:18px;
 }
 
-/* Dark Mode */
+/* Features */
 
-.dark{
-    background:linear-gradient(135deg,#0f0f0f,#1f1f1f);
-    color:white;
+.features{
+    margin-top:35px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
 }
 
-.dark .container,
-.dark .card,
-.dark .stat-card,
-.dark .welcome-card,
-.dark #resources{
-    background:rgba(255,255,255,0.08);
+.feature{
+    background:var(--glass);
+    padding:22px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
 }
 
 /* Footer */
 
 .footer{
     text-align:center;
-    padding:20px;
-    margin-top:30px;
+    padding:30px;
     opacity:0.8;
 }
 
-/* Mobile */
+/* Dark Mode */
+
+.dark{
+    background:linear-gradient(135deg,#050505,#202020);
+}
+
+.dark .container,
+.dark .card,
+.dark .stat-card,
+.dark .feature,
+.dark .welcome-card,
+.dark #resources{
+    background:rgba(255,255,255,0.08);
+}
+
+/* Responsive */
 
 @media(max-width:600px){
+
+    .navbar{
+        padding:15px;
+    }
 
     .logo{
         font-size:22px;
     }
 
     button{
-        padding:8px 12px;
+        padding:9px 14px;
+        font-size:14px;
+    }
+
+    .dashboard{
+        padding:18px;
     }
 
 }
@@ -284,10 +350,11 @@ input,select{
 
 <div class="navbar">
 
-    <div class="logo">📘 EduSpark Ultra</div>
+    <div class="logo">📘 EduSpark Ultra+</div>
 
     <div class="nav-buttons">
         <button onclick="toggleDark()">🌙</button>
+        <button onclick="resetProgress()">🔄 Reset</button>
         <button onclick="logout()">Logout</button>
     </div>
 
@@ -297,7 +364,7 @@ input,select{
 
 <div class="container" id="loginBox">
 
-    <h1>🎓 Smart Student Login</h1>
+    <h1>🎓 Student Login</h1>
 
     <input type="text" id="username" placeholder="Enter Your Name">
 
@@ -315,7 +382,7 @@ input,select{
         <option>Class 10</option>
     </select>
 
-    <button onclick="login()">🚀 Login</button>
+    <button onclick="login()">🚀 Enter Dashboard</button>
 
 </div>
 
@@ -323,12 +390,15 @@ input,select{
 
 <div class="dashboard" id="dashboard">
 
+    <!-- Welcome -->
+
     <div class="welcome-card">
 
         <h1 id="welcome"></h1>
 
-        <p style="margin-top:10px;">
-            Welcome to your AI-powered smart learning dashboard.
+        <p>
+            Your personal smart learning dashboard with study resources,
+            progress tracking and motivation.
         </p>
 
         <div class="progress-bar">
@@ -347,33 +417,33 @@ input,select{
         </div>
 
         <div class="stat-card">
-            <h2 id="studyTime">0</h2>
+            <h2 id="topicsText">0</h2>
             <p>Topics Opened</p>
         </div>
 
         <div class="stat-card">
-            <h2>4</h2>
-            <p>Subjects</p>
+            <h2 id="streakText">1🔥</h2>
+            <p>Study Streak</p>
         </div>
 
     </div>
 
     <!-- SUBJECTS -->
 
-    <h2 style="margin-bottom:20px;">📚 Subjects</h2>
+    <h2>📚 Subjects</h2>
 
     <div class="grid">
 
         <div class="card">
             <h3>📐 Maths</h3>
-            <p>Formulas, Algebra & Practice</p>
+            <p>Algebra, Formulas & Practice</p>
             <br>
             <button onclick="openResource('math')">Open</button>
         </div>
 
         <div class="card">
             <h3>🔬 Science</h3>
-            <p>Concepts, Videos & Notes</p>
+            <p>Concepts, Notes & Experiments</p>
             <br>
             <button onclick="openResource('science')">Open</button>
         </div>
@@ -387,9 +457,30 @@ input,select{
 
         <div class="card">
             <h3>🌍 SST</h3>
-            <p>History, Geography & Civics</p>
+            <p>History, Civics & Geography</p>
             <br>
             <button onclick="openResource('sst')">Open</button>
+        </div>
+
+    </div>
+
+    <!-- Features -->
+
+    <div class="features">
+
+        <div class="feature">
+            <h3>⏰ Daily Goal</h3>
+            <p>Open at least 3 topics daily to improve your progress.</p>
+        </div>
+
+        <div class="feature">
+            <h3>🏆 Achievement</h3>
+            <p id="achievement">Beginner Learner</p>
+        </div>
+
+        <div class="feature">
+            <h3>📅 Today's Date</h3>
+            <p id="date"></p>
         </div>
 
     </div>
@@ -398,7 +489,7 @@ input,select{
 
     <div id="resources"></div>
 
-    <!-- Motivational Quote -->
+    <!-- Quotes -->
 
     <div class="quote-box" id="quote">
         ✨ "Success is the sum of small efforts repeated daily."
@@ -409,7 +500,7 @@ input,select{
 <!-- FOOTER -->
 
 <div class="footer">
-    Made with ❤️ for Smart Students
+    Made with ❤️ for Smart Students | EduSpark Ultra+
 </div>
 
 <script>
@@ -421,19 +512,26 @@ const quotes = [
 "🚀 Dream big and dare to fail.",
 "📘 Success starts with discipline.",
 "🌟 Every expert was once a beginner.",
-"💡 Small progress is still progress."
+"💡 Small progress is still progress.",
+"🏆 Consistency creates success.",
+"📚 Education is the passport to the future."
 ];
 
-/* LOGIN */
+/* Login */
 
 function login(){
 
-    let user = document.getElementById("username").value;
-    let board = document.getElementById("board").value;
-    let cls = document.getElementById("class").value;
+    let user =
+    document.getElementById("username").value.trim();
 
-    if(user.trim() === ""){
-        alert("Please enter your name!");
+    let board =
+    document.getElementById("board").value;
+
+    let cls =
+    document.getElementById("class").value;
+
+    if(user === ""){
+        alert("Please enter your name.");
         return;
     }
 
@@ -452,7 +550,7 @@ function login(){
     loadDashboard();
 }
 
-/* LOAD */
+/* Load Dashboard */
 
 function loadDashboard(){
 
@@ -466,28 +564,65 @@ function loadDashboard(){
         document.getElementById("welcome").innerHTML =
         `👋 Welcome ${user}`;
 
+        document.getElementById("date").innerHTML =
+        new Date().toDateString();
+
         updateProgress();
 
-        document.getElementById("studyTime").innerHTML =
-        localStorage.getItem("topics");
+        let topics =
+        localStorage.getItem("topics") || 0;
+
+        document.getElementById("topicsText").innerHTML =
+        topics;
+
+        updateAchievement();
 
     }
+
 }
 
-/* PROGRESS */
+/* Progress */
 
 function updateProgress(){
 
-    let progress = localStorage.getItem("progress") || 0;
+    let progress =
+    localStorage.getItem("progress") || 0;
 
     document.getElementById("progress").style.width =
     progress + "%";
 
     document.getElementById("progressText").innerHTML =
     progress + "%";
+
 }
 
-/* RESOURCES */
+/* Achievement */
+
+function updateAchievement(){
+
+    let progress =
+    parseInt(localStorage.getItem("progress")) || 0;
+
+    let achievement = "Beginner Learner";
+
+    if(progress >= 30){
+        achievement = "📘 Active Learner";
+    }
+
+    if(progress >= 60){
+        achievement = "🚀 Smart Achiever";
+    }
+
+    if(progress >= 90){
+        achievement = "🏆 EduSpark Champion";
+    }
+
+    document.getElementById("achievement").innerHTML =
+    achievement;
+
+}
+
+/* Resources */
 
 function openResource(subject){
 
@@ -497,9 +632,9 @@ function openResource(subject){
 
         content += `
         <ul>
-            <li><a href="https://ncert.nic.in/textbook/pdf/iemh1dd.pdf" target="_blank">NCERT Maths PDF</a></li>
-            <li><a href="https://www.topperlearning.com" target="_blank">Practice Questions</a></li>
-            <li><a href="https://byjus.com/maths/algebra-formulas/" target="_blank">Algebra Formulas</a></li>
+            <li><a href="https://ncert.nic.in/textbook.php" target="_blank">NCERT Maths Books</a></li>
+            <li><a href="https://www.khanacademy.org/math" target="_blank">Khan Academy Maths</a></li>
+            <li><a href="https://byjus.com/maths/" target="_blank">Math Formulas & Concepts</a></li>
         </ul>
         `;
     }
@@ -509,8 +644,8 @@ function openResource(subject){
         content += `
         <ul>
             <li><a href="https://ncert.nic.in/textbook.php" target="_blank">NCERT Science Books</a></li>
-            <li><a href="https://byjus.com/science/" target="_blank">Concept Videos</a></li>
-            <li><a href="https://www.learncbse.in" target="_blank">Sample Papers</a></li>
+            <li><a href="https://www.khanacademy.org/science" target="_blank">Science Videos</a></li>
+            <li><a href="https://byjus.com/science/" target="_blank">Science Concepts</a></li>
         </ul>
         `;
     }
@@ -519,9 +654,9 @@ function openResource(subject){
 
         content += `
         <ul>
-            <li><a href="https://www.learncbse.in/english-grammar/" target="_blank">Grammar Rules</a></li>
-            <li><a href="https://byjus.com/english/" target="_blank">Writing Skills</a></li>
-            <li><a href="https://ncert.nic.in" target="_blank">NCERT English</a></li>
+            <li><a href="https://www.britishcouncil.in/english" target="_blank">British Council English</a></li>
+            <li><a href="https://www.learncbse.in/english-grammar/" target="_blank">Grammar Notes</a></li>
+            <li><a href="https://www.grammarly.com/blog/" target="_blank">Writing Skills</a></li>
         </ul>
         `;
     }
@@ -530,16 +665,17 @@ function openResource(subject){
 
         content += `
         <ul>
-            <li><a href="https://ncert.nic.in/textbook.php" target="_blank">NCERT SST</a></li>
-            <li><a href="https://www.learncbse.in" target="_blank">History Notes</a></li>
-            <li><a href="https://byjus.com/free-ias-prep/" target="_blank">Geography Maps</a></li>
+            <li><a href="https://ncert.nic.in/textbook.php" target="_blank">NCERT SST Books</a></li>
+            <li><a href="https://www.nationalgeographic.com/" target="_blank">Geography Learning</a></li>
+            <li><a href="https://www.history.com/" target="_blank">World History</a></li>
         </ul>
         `;
     }
 
-    document.getElementById("resources").innerHTML = content;
+    document.getElementById("resources").innerHTML =
+    content;
 
-    /* increase progress */
+    /* Progress */
 
     let progress =
     parseInt(localStorage.getItem("progress")) || 0;
@@ -554,7 +690,7 @@ function openResource(subject){
 
     updateProgress();
 
-    /* increase topics */
+    /* Topics */
 
     let topics =
     parseInt(localStorage.getItem("topics")) || 0;
@@ -563,18 +699,45 @@ function openResource(subject){
 
     localStorage.setItem("topics",topics);
 
-    document.getElementById("studyTime").innerHTML =
+    document.getElementById("topicsText").innerHTML =
     topics;
 
+    updateAchievement();
+
 }
 
-/* DARK MODE */
+/* Dark Mode */
 
 function toggleDark(){
+
     document.body.classList.toggle("dark");
+
 }
 
-/* LOGOUT */
+/* Reset */
+
+function resetProgress(){
+
+    if(confirm("Reset all progress?")){
+
+        localStorage.setItem("progress",0);
+        localStorage.setItem("topics",0);
+
+        updateProgress();
+
+        document.getElementById("topicsText").innerHTML =
+        "0";
+
+        updateAchievement();
+
+        document.getElementById("resources").innerHTML =
+        "";
+
+    }
+
+}
+
+/* Logout */
 
 function logout(){
 
@@ -594,230 +757,16 @@ setInterval(()=>{
     let random =
     quotes[Math.floor(Math.random()*quotes.length)];
 
-    document.getElementById("quote").innerHTML = random;
+    document.getElementById("quote").innerHTML =
+    random;
 
 },4000);
 
-/* AUTO LOAD */
+/* Auto Load */
 
 window.onload = loadDashboard;
 
 </script>
 
 </body>
-</html>
-    margin: 10px;
-    border-radius: 12px;
-    transition: 0.4s;
-}
-.card:hover {
-    transform: translateY(-8px) scale(1.05);
-}
-
-/* Grid */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-/* Progress */
-.progress-bar {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-}
-.progress {
-    height: 20px;
-    background: limegreen;
-    width: 0%;
-}
-
-/* Dark mode */
-.dark {
-    background: black;
-    color: white;
-}
-</style>
-</head>
-
-<body>
-
-<div class="navbar">
-    <h2>📘 EduSpark Pro</h2>
-    <div>
-        <button onclick="toggleDark()">🌙</button>
-        <button onclick="logout()">Logout</button>
-    </div>
-</div>
-
-<!-- LOGIN -->
-<div class="container" id="loginBox">
-    <h1>Student Login</h1>
-    <input type="text" id="username" placeholder="Enter Name"><br>
-
-    <select id="board">
-        <option>CBSE</option>
-        <option>ICSE</option>
-    </select><br>
-
-    <select id="class">
-        <option>Class 6</option>
-        <option>Class 7</option>
-        <option>Class 8</option>
-        <option>Class 9</option>
-        <option>Class 10</option>
-    </select><br>
-
-    <button onclick="login()">Login</button>
-</div>
-
-<!-- DASHBOARD -->
-<div class="dashboard" id="dashboard">
-    <h2 id="welcome"></h2>
-
-    <h3>📊 Progress</h3>
-    <div class="progress-bar">
-        <div class="progress" id="progress"></div>
-    </div>
-
-    <h3>📚 Subjects</h3>
-    <div class="grid">
-
-        <div class="card">
-            <h3>📐 Maths</h3>
-            <button onclick="openResource('math')">Open</button>
-        </div>
-
-        <div class="card">
-            <h3>🔬 Science</h3>
-            <button onclick="openResource('science')">Open</button>
-        </div>
-
-        <div class="card">
-            <h3>📖 English</h3>
-            <button onclick="openResource('english')">Open</button>
-        </div>
-
-        <div class="card">
-            <h3>🌍 SST</h3>
-            <button onclick="openResource('sst')">Open</button>
-        </div>
-
-    </div>
-
-    <div id="resources"></div>
-</div>
-
-<script>
-
-/* LOGIN */
-function login() {
-    let user = document.getElementById("username").value;
-    let board = document.getElementById("board").value;
-    let cls = document.getElementById("class").value;
-
-    if (user === "") {
-        alert("Enter name!");
-        return;
-    }
-
-    localStorage.setItem("user", user);
-    localStorage.setItem("board", board);
-    localStorage.setItem("class", cls);
-    localStorage.setItem("progress", 10);
-
-    loadDashboard();
-}
-
-function logout() {
-    localStorage.clear();
-    location.reload();
-}
-
-/* LOAD */
-function loadDashboard() {
-    let user = localStorage.getItem("user");
-
-    if (user) {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("dashboard").style.display = "block";
-
-        document.getElementById("welcome").innerHTML =
-            `Welcome ${user} | ${localStorage.getItem("board")} | ${localStorage.getItem("class")}`;
-
-        updateProgress();
-    }
-}
-
-/* PROGRESS */
-function updateProgress() {
-    let progress = localStorage.getItem("progress") || 0;
-    document.getElementById("progress").style.width = progress + "%";
-}
-
-/* RESOURCES */
-function openResource(subject) {
-
-    let board = localStorage.getItem("board");
-    let cls = localStorage.getItem("class");
-
-    let content = `<h2>${subject.toUpperCase()} Resources</h2>`;
-
-    if (subject === "math") {
-        content += `
-        <ul>
-            <li><a href="https://ncert.nic.in/textbook/pdf/iemh1dd.pdf" target="_blank">NCERT Maths PDF</a></li>
-            <li><a href="https://www.topperlearning.com" target="_blank">Practice Questions</a></li>
-            <li><a href="https://byjus.com/maths/algebra-formulas/" target="_blank">Algebra Formulas</a></li>
-        </ul>`;
-    }
-
-    if (subject === "science") {
-        content += `
-        <ul>
-            <li><a href="https://ncert.nic.in/textbook.php" target="_blank">NCERT Science Books</a></li>
-            <li><a href="https://byjus.com/science/" target="_blank">Concept Videos</a></li>
-            <li><a href="https://www.learncbse.in" target="_blank">Sample Papers</a></li>
-        </ul>`;
-    }
-
-    if (subject === "english") {
-        content += `
-        <ul>
-            <li><a href="https://www.learncbse.in/english-grammar/" target="_blank">Grammar Rules</a></li>
-            <li><a href="https://byjus.com/english/" target="_blank">Writing Skills</a></li>
-            <li><a href="https://ncert.nic.in" target="_blank">NCERT English</a></li>
-        </ul>`;
-    }
-
-    if (subject === "sst") {
-        content += `
-        <ul>
-            <li><a href="https://ncert.nic.in/textbook.php" target="_blank">NCERT SST</a></li>
-            <li><a href="https://www.learncbse.in" target="_blank">History Notes</a></li>
-            <li><a href="https://byjus.com/free-ias-prep/" target="_blank">Geography Maps</a></li>
-        </ul>`;
-    }
-
-    document.getElementById("resources").innerHTML = content;
-
-    /* increase progress */
-    let progress = parseInt(localStorage.getItem("progress")) || 0;
-    progress += 10;
-    if (progress > 100) progress = 100;
-    localStorage.setItem("progress", progress);
-    updateProgress();
-}
-
-/* DARK MODE */
-function toggleDark() {
-    document.body.classList.toggle("dark");
-}
-
-/* AUTO LOAD */
-window.onload = loadDashboard;
-
-</script>
-
-</body>
-</html>
+    </html>
